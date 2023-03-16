@@ -34,10 +34,10 @@ runs:
         sfdx force:auth:sfdxurl:store -f sfdx_auth -d -a devhub --setdefaultdevhubusername
       shell: bash
     - name: Create Scratch org
-      run: sfdx force:org:create --targetdevhubusername devhub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ${{ inputs.org-alias }} --wait 10 --durationdays 1
+      run: sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --duration-days 1 --setalias ${{ inputs.org-alias }}
       shell: bash
     - name: Delete Scratch org
       if: ${{ always() }}
-      run: sfdx sfdx force:org:delete --targetusername ${{ inputs.org-alias }} --noprompt
+      run: sf org delete scratch --target-org ${{ inputs.org-alias }} --no-prompt
       shell: bash
     
