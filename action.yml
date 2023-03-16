@@ -1,23 +1,48 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Create APEX Package'
+description: 'Create APEX package'
+branding:
+  icon: arrow-down-circle
+  color: blue
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+  devhub-client-id:
+    description: The JWT client ID for JWT authentication. Can be used in place of sfdxurl authentication. Required with `jwt-key`.
+    required: false
+  devhub-jwt-key:
+    description: The JWT private key for JWT authentication. Can be used in place of sfdxurl authentication. Required with `client-id`.
+    required: false
+  devhub-url:
+    description: The sfdx URL for authentication (force://xxxxxx). Can be used in place of JWT authentication.
+    required: false
+  org-alias:
+    description: The alias to use for the organization logged in as.
+    required: false
+    default: myOrg
+
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        path: ${{ github.repository }}
+    - name: Install Salesforce CLI
+      run: |
+        # TODO: Add env var to specify a sfdx version
+        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+        mkdir sfdx-cli && tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 && ./sfdx-cli/install
+        sfdx version
       shell: bash
-    - id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-      shell: bash
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-      shell: bash
-    - run: goodbye.sh
-      shell: bash
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Devhub authentication
+      run: sfdx force:auth:sfdxurl:store -f ./sfdxurl.txt -a devhub
+      run: |
+        # TODO: Handle auth with Server key
+        echo ${{ inputs.devhub-url }} > sfdx_auth
+        sfdx force:auth:sfdxurl:store -f sfdx_auth -d -a devhub --setdefaultdevhubusername
+    - name: Create Scratch org
+      run: sfdx force:org:create --targetdevhubusername devhub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ${inputs.org-alias} --wait 10 --durationdays 1
+    - name: Delete Scratch org
+      if: ${{ always() }}
+      run: sfdx sfdx force:org:delete --targetusername ${inputs.org-alias} --noprompt
+    
