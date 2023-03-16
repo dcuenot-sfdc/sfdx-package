@@ -21,10 +21,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        path: ${{ github.repository }}
     - name: Install Salesforce CLI
       run: |
         # TODO: Add env var to specify a sfdx version
@@ -32,17 +28,17 @@ runs:
         mkdir sfdx-cli && tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 && ./sfdx-cli/install
         sfdx version
       shell: bash
-    - name: Checkout
-      uses: actions/checkout@v3
     - name: Devhub authentication
-      run: sfdx force:auth:sfdxurl:store -f ./sfdxurl.txt -a devhub
       run: |
         # TODO: Handle auth with Server key
         echo ${{ inputs.devhub-url }} > sfdx_auth
         sfdx force:auth:sfdxurl:store -f sfdx_auth -d -a devhub --setdefaultdevhubusername
+      shell: bash
     - name: Create Scratch org
       run: sfdx force:org:create --targetdevhubusername devhub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ${inputs.org-alias} --wait 10 --durationdays 1
+      shell: bash
     - name: Delete Scratch org
       if: ${{ always() }}
       run: sfdx sfdx force:org:delete --targetusername ${inputs.org-alias} --noprompt
+      shell: bash
     
