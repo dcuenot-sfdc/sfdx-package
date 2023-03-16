@@ -26,15 +26,13 @@ runs:
         # TODO: Add env var to specify a sfdx version
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
         mkdir ~/sfdx && tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1 && echo "~/sfdx/bin" >> $GITHUB_PATH
-        ls -al ~/sfdx/bin
-        echo $GITHUB_PATH
         ~/sfdx/bin/sf version
       shell: bash
     - name: Devhub authentication
       run: |
         # TODO: Handle auth with Server key
         echo ${{ inputs.devhub-url }} > sfdx_auth
-        sfdx force:auth:sfdxurl:store -f sfdx_auth -d -a devhub --setdefaultdevhubusername
+        sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
     - name: Create Scratch org
       run: sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --duration-days 1 --setalias ${{ inputs.org-alias }}
