@@ -24,8 +24,9 @@ runs:
     - name: Install Salesforce CLI
       run: |
         # TODO: Add env var to specify a sfdx version
-        wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
-        mkdir sfdx-cli && tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1 && ./sfdx-cli/install
+        wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+        ls
+        mkdir sfdx && tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1 && ./sfdx/install
         sfdx version
       shell: bash
     - name: Devhub authentication
