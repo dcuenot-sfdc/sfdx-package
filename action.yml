@@ -39,6 +39,7 @@ runs:
       shell: bash
     - name: Display Scratch org
       run: sf org display --target-org ${{ inputs.org-alias }} --verbose
+      shell: bash
     - name: Delete Scratch org
       if: ${{ always() }}
       run: sf org delete scratch --target-org ${{ inputs.org-alias }} --no-prompt
