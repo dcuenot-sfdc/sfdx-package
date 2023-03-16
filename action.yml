@@ -36,7 +36,7 @@ runs:
       shell: bash
     - name: Create Scratch org
       run: |
-        request-id = $(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
+        request-id=$(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
         echo $request-id
         sf org resume scratch --job-id $request-id
         sf org resume scratch --job-id $request-id --json
