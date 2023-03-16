@@ -35,7 +35,11 @@ runs:
         sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
     - name: Create Scratch org
-      run: sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json
+      run: |
+        request-id = $(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
+        echo $request-id
+        sf org resume scratch --job-id $request-id
+        sf org resume scratch --job-id $request-id --json
       shell: bash
     - name: Display Scratch org
       run: sf org display --target-org ${{ inputs.org-alias }} --verbose
