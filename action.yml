@@ -35,7 +35,7 @@ runs:
         sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
     - name: Create Scratch org
-      run: sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --duration-days 1 --setalias ${{ inputs.org-alias }}
+      run: sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --duration-days 1 --alias ${{ inputs.org-alias }}
       shell: bash
     - name: Delete Scratch org
       if: ${{ always() }}
