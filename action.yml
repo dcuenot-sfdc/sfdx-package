@@ -25,9 +25,7 @@ runs:
       run: |
         # TODO: Add env var to specify a sfdx version
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-        ls
         mkdir sfdx && tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1 && ./sfdx/install
-        sfdx version
       shell: bash
     - name: Devhub authentication
       run: |
@@ -36,10 +34,10 @@ runs:
         sfdx force:auth:sfdxurl:store -f sfdx_auth -d -a devhub --setdefaultdevhubusername
       shell: bash
     - name: Create Scratch org
-      run: sfdx force:org:create --targetdevhubusername devhub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ${inputs.org-alias} --wait 10 --durationdays 1
+      run: sfdx force:org:create --targetdevhubusername devhub --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ${{ inputs.org-alias }} --wait 10 --durationdays 1
       shell: bash
     - name: Delete Scratch org
       if: ${{ always() }}
-      run: sfdx sfdx force:org:delete --targetusername ${inputs.org-alias} --noprompt
+      run: sfdx sfdx force:org:delete --targetusername ${{ inputs.org-alias }} --noprompt
       shell: bash
     
