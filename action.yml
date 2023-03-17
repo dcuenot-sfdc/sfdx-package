@@ -34,6 +34,8 @@ runs:
         echo ${{ inputs.devhub-url }} > sfdx_auth
         sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Hello world action step
       uses: ./plop/ # Uses an action in the root directory
       with:
