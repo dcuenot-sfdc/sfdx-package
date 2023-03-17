@@ -36,8 +36,10 @@ runs:
       shell: bash
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        path: ${{ github.action_path }}
     - name: Hello world action step
-      uses: $GITHUB_ACTION_PATH/plop/ # Uses an action in the root directory
+      uses: ./plop/ # Uses an action in the root directory
       with:
         who-to-greet: 'Mona the Octocat'
     - name: Create Scratch org
