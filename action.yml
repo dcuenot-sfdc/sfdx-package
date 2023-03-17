@@ -40,7 +40,7 @@ runs:
         echo ${{ github.action_ref }}
       shell: bash
     - name: Hello world action step
-      uses: dcuenot-sfdc/sfdx-package/plop@v1.0.5
+      uses: ${{ github.action_repository }}/plop@${{ github.action_ref }}
       with:
         who-to-greet: ${{ github.action_repository }}
     - name: Create Scratch org
