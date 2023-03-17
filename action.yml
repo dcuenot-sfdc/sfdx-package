@@ -34,6 +34,10 @@ runs:
         echo ${{ inputs.devhub-url }} > sfdx_auth
         sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
+    - name: Hello world action step
+      uses: ./plop/ # Uses an action in the root directory
+      with:
+        who-to-greet: 'Mona the Octocat'
     - name: Create Scratch org
       run: |
         request-id=$(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
