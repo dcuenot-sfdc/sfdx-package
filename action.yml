@@ -40,7 +40,8 @@ runs:
         echo ${{ github.action_ref }}
       shell: bash
     - name: Hello world action step
-      uses: ${{ github.action_repository }}/plop@${{ github.action_ref }}
+      run: npm run index.js
+      working-directory: plop
       with:
         who-to-greet: ${{ github.action_repository }}
     - name: Create Scratch org
