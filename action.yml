@@ -37,7 +37,7 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Hello world action step
-      uses: ${{ github.action_path }}/plop/ # Uses an action in the root directory
+      uses: $GITHUB_ACTION_PATH/plop/ # Uses an action in the root directory
       with:
         who-to-greet: 'Mona the Octocat'
     - name: Create Scratch org
