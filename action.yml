@@ -35,7 +35,7 @@ runs:
         sf org login sfdx-url --sfdx-url-file sfdx_auth --set-default --alias devhub
       shell: bash
     - name: Hello world action step
-      uses: ./plop/ # Uses an action in the root directory
+      uses: ${{ github.action_path }}/plop/ # Uses an action in the root directory
       with:
         who-to-greet: 'Mona the Octocat'
     - name: Create Scratch org
