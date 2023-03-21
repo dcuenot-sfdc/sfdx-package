@@ -21,7 +21,7 @@ async function main() {
     console.log(b);
     console.log(c);
     console.log('YOLOOOO');
-    // generateLogin();
+    generateLogin();
     
     
     // Get the JSON webhook payload for the event that triggered the workflow
