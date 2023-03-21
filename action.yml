@@ -25,7 +25,9 @@ runs:
       # TODO: Add env var to specify a sfdx version
       run: |
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
-        mkdir $GITHUB_ACTION_PATH/sfdx && tar xJf sfdx-linux-x64.tar.xz -C $GITHUB_ACTION_PATH/sfdx --strip-components 1 && echo "$GITHUB_ACTION_PATH/sfdx/bin" >> $GITHUB_PATH
+        mkdir ~/sfdx && tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1 
+        ls ~/sfdx
+        # /home/runner/.local/bin
         env
         set
         echo $GITHUB_PATH
