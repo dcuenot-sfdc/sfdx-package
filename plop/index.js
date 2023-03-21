@@ -9,7 +9,8 @@ try {
   //const time = (new Date()).toTimeString();
   //core.setOutput("time", time);
 
-  exec.exec('sf version')
+  exec.exec('~/sfdx/bin/sf version')
+  console.log('YOLOOOO')
   generateLogin();
   
   
