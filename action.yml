@@ -26,6 +26,8 @@ runs:
       run: |
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
         mkdir $GITHUB_ACTION_PATH/sfdx && tar xJf sfdx-linux-x64.tar.xz -C $GITHUB_ACTION_PATH/sfdx --strip-components 1 && echo "$GITHUB_ACTION_PATH/sfdx/bin" >> $GITHUB_PATH
+        env
+        set
         echo $GITHUB_PATH
         sf version
       shell: bash
