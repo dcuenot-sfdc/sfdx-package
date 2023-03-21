@@ -40,7 +40,7 @@ runs:
         echo '***'
         echo $PATH
         echo '-----'
-        which sf
+        sudo which sf
       shell: bash
     - name: Hello world action step
       uses: dcuenot-sfdc/sfdx-package/plop@v1.0.5
