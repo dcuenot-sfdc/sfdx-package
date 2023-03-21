@@ -9,6 +9,8 @@ try {
   //const time = (new Date()).toTimeString();
   //core.setOutput("time", time);
 
+
+  console.log('Plop plop ')
   exec.exec('echo $PATH');
   exec.exec('echo $GITHUB_PATH');
   exec.exec('~/sfdx/bin/sf version')
