@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-import {exec} from '@actions/exec'
+const exec = require('@actions/exec');
 
 try {
   // `who-to-greet` input defined in action metadata file
@@ -9,7 +9,7 @@ try {
   //const time = (new Date()).toTimeString();
   //core.setOutput("time", time);
 
-  exec('sf version')
+  exec.exec('sf version')
   generateLogin();
   
   
@@ -21,9 +21,9 @@ try {
 }
 
 function generateLogin() {
-  exec("sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --async --json", function (error, stdout, stderr) {
+  exec.exec("sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --async --json", function (error, stdout, stderr) {
     if (error) console.log(stderr);
-    exec("sfdx force:user:display --json", function (error1, stdout1, stderr1) {
+    exec.exec("sfdx force:user:display --json", function (error1, stdout1, stderr1) {
       const { result } = JSON.parse(stdout1);
       core.setOutput(
         "login-url",
