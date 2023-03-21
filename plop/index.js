@@ -2,32 +2,34 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const exec = require('@actions/exec');
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  //const nameToGreet = core.getInput('who-to-greet');
-  //console.log(`Hello ${nameToGreet}!`);
-  //const time = (new Date()).toTimeString();
-  //core.setOutput("time", time);
+async function main() {
+  try {
+    // `who-to-greet` input defined in action metadata file
+    //const nameToGreet = core.getInput('who-to-greet');
+    //console.log(`Hello ${nameToGreet}!`);
+    //const time = (new Date()).toTimeString();
+    //core.setOutput("time", time);
 
 
-  console.log('Plop plop ');
-  const [{stdout: a}, {stdout: b}, {stdout: c}] = await Promise.all([
-    exec.getExecOutput('echo $PATH'),
-    exec.getExecOutput('echo $GITHUB_PATH'),
-    exec.getExecOutput('~/sfdx/bin/sf version')
-  ])
-  console.log(a);
-  console.log(b);
-  console.log(c);
-  console.log('YOLOOOO');
-  generateLogin();
-  
-  
-  // Get the JSON webhook payload for the event that triggered the workflow
-  //const payload = JSON.stringify(github.context.payload, undefined, 2)
-  //console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+    console.log('Plop plop ');
+    const [{stdout: a}, {stdout: b}, {stdout: c}] = await Promise.all([
+      exec.getExecOutput('echo $PATH'),
+      exec.getExecOutput('echo $GITHUB_PATH'),
+      exec.getExecOutput('~/sfdx/bin/sf version')
+    ])
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log('YOLOOOO');
+    // generateLogin();
+    
+    
+    // Get the JSON webhook payload for the event that triggered the workflow
+    //const payload = JSON.stringify(github.context.payload, undefined, 2)
+    //console.log(`The event payload: ${payload}`);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
 
 function generateLogin() {
@@ -42,3 +44,5 @@ function generateLogin() {
     });
   });
 }
+
+main()
