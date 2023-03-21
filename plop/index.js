@@ -13,15 +13,14 @@ async function main() {
 
     console.log('Plop plop ');
     const [{stdout: a}, {stdout: b}, {stdout: c}] = await Promise.all([
-      exec.getExecOutput('env'),
+      exec.getExecOutput('sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --async --json'),
       exec.getExecOutput('pwd'),
       exec.getExecOutput('sf version')
     ])
     console.log(a);
-    console.log(b);
     console.log(c);
     console.log('YOLOOOO');
-    generateLogin();
+    // generateLogin();
     
     
     // Get the JSON webhook payload for the event that triggered the workflow
