@@ -9,8 +9,8 @@ try {
   //const time = (new Date()).toTimeString();
   //core.setOutput("time", time);
 
-  exec.exec('which sf')
-  exec.exec('echo $PATH')
+  exec.exec('echo $PATH');
+  exec.exec('echo $GITHUB_PATH');
   exec.exec('~/sfdx/bin/sf version')
   console.log('YOLOOOO')
   generateLogin();

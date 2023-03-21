@@ -22,8 +22,8 @@ runs:
   using: "composite"
   steps:
     - name: Install Salesforce CLI
+      # TODO: Add env var to specify a sfdx version
       run: |
-        # TODO: Add env var to specify a sfdx version
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
         mkdir ~/sfdx && tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1 && echo "~/sfdx/bin" >> $GITHUB_PATH
         ~/sfdx/bin/sf version
@@ -41,8 +41,6 @@ runs:
         echo $PATH
         echo '-----'
         sf version
-        echo '---***---'
-        sudo which sf
       shell: bash
     - name: Hello world action step
       uses: dcuenot-sfdc/sfdx-package/plop@v1.0.5
