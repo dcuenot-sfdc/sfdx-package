@@ -11,9 +11,12 @@ try {
 
 
   console.log('Plop plop ');
-  exec.getExecOutput('echo $PATH');
-  exec.getExecOutput('echo $GITHUB_PATH');
-  exec.getExecOutput('~/sfdx/bin/sf version');
+  const a = exec.getExecOutput('echo $PATH');
+  const b = exec.getExecOutput('echo $GITHUB_PATH');
+  const c = exec.getExecOutput('~/sfdx/bin/sf version');
+  console.log(a);
+  console.log(b);
+  console.log(c);
   console.log('YOLOOOO');
   generateLogin();
   
