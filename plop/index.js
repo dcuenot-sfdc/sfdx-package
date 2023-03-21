@@ -13,8 +13,8 @@ async function main() {
 
     console.log('Plop plop ');
     const [{stdout: a}, {stdout: b}, {stdout: c}] = await Promise.all([
-      exec.getExecOutput('echo', ['$PATH']),
-      exec.getExecOutput('echo', ['$GITHUB_PATH']),
+      exec.getExecOutput('env'),
+      exec.getExecOutput('pwd'),
       exec.getExecOutput('sf version')
     ])
     console.log(a);
