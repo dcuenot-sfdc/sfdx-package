@@ -10,11 +10,11 @@ try {
   //core.setOutput("time", time);
 
 
-  console.log('Plop plop ')
+  console.log('Plop plop ');
   exec.exec('echo $PATH');
   exec.exec('echo $GITHUB_PATH');
-  exec.exec('~/sfdx/bin/sf version')
-  console.log('YOLOOOO')
+  exec.exec('~/sfdx/bin/sf version');
+  console.log('YOLOOOO');
   generateLogin();
   
   
