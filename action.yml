@@ -36,8 +36,7 @@ runs:
       shell: bash
     - name: Yolo
       run: |
-        echo ${{ github.action_repository }}
-        echo ${{ github.action_ref }}
+        which sf
       shell: bash
     - name: Hello world action step
       uses: dcuenot-sfdc/sfdx-package/plop@v1.0.5
