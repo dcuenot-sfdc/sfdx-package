@@ -11,9 +11,9 @@ try {
 
 
   console.log('Plop plop ');
-  exec.exec('echo $PATH');
-  exec.exec('echo $GITHUB_PATH');
-  exec.exec('~/sfdx/bin/sf version');
+  exec.getExecOutput('echo $PATH');
+  exec.getExecOutput('echo $GITHUB_PATH');
+  exec.getExecOutput('~/sfdx/bin/sf version');
   console.log('YOLOOOO');
   generateLogin();
   
