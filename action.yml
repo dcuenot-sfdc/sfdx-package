@@ -25,12 +25,9 @@ runs:
       # TODO: Add env var to specify a sfdx version
       run: |
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
-        mkdir ~/sfdx && tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1 
-        mv ~/sfdx/bin/* /home/runner/.local/bin
-        ls -al ~/sfdx/bin
-        # /home/runner/.local/bin
+        mkdir $HOME/sfdx && tar xJf sfdx-linux-x64.tar.xz -C $HOME/sfdx --strip-components 1 && echo "$HOME/sfdx" >> $GITHUB_PATH
         echo $GITHUB_PATH
-        ls -al /home/runner/.local/bin
+        ls -al /home/runner/.local
         sf version
       shell: bash
     - name: Devhub authentication
