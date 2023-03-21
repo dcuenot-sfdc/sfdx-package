@@ -40,6 +40,8 @@ runs:
         echo '***'
         echo $PATH
         echo '-----'
+        sf version
+        echo '---***---'
         sudo which sf
       shell: bash
     - name: Hello world action step
