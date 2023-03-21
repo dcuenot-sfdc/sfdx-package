@@ -43,13 +43,13 @@ runs:
       uses: dcuenot-sfdc/sfdx-package/plop@v1.0.5
       with:
         who-to-greet: ${{ github.action_repository }}
-    - name: Create Scratch org
-      run: |
-        request-id=$(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
-        echo $request-id
-        sf org resume scratch --job-id $request-id
-        sf org resume scratch --job-id $request-id --json
-      shell: bash
+    #- name: Create Scratch org
+    #  run: |
+    #    request-id=$(sf org create scratch --target-dev-hub devhub --definition-file config/project-scratch-def.json --set-default --no-track-source --duration-days 1 --alias ${{ inputs.org-alias }} --async --json | jq .result.scratchOrgInfo.Id)
+    #    echo $request-id
+    #    sf org resume scratch --job-id $request-id
+    #    sf org resume scratch --job-id $request-id --json
+    #  shell: bash
     - name: Display Scratch org
       run: sf org display --target-org ${{ inputs.org-alias }} --verbose
       shell: bash
