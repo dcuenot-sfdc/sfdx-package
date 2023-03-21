@@ -26,7 +26,7 @@ runs:
       run: |
         wget -q https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
         mkdir $HOME/sfdx && tar xJf sfdx-linux-x64.tar.xz -C $HOME/sfdx --strip-components 1 && echo "$HOME/sfdx/bin" >> $GITHUB_PATH
-        sf version
+        $HOME/sfdx/bin/sf version
       shell: bash
     - name: Devhub authentication
       run: |
